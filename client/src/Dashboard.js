@@ -30,7 +30,6 @@ const Dashboard = ({ code }) => {
 
       setSearchResults(
         res.body.tracks.items.map((track) => {
-          console.log("track:", track);
           return {
             artist: track.artists[0].name,
             album: track.album.name,
@@ -81,6 +80,7 @@ const StyledInput = styled.input`
 const ResultContainer = styled.div`
   overflow-y: auto;
   height: 100%;
+  padding: 5px 3px;
 `;
 
 export default Dashboard;

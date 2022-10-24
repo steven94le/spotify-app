@@ -4,7 +4,7 @@ const TrackSearchResult = ({ track }) => {
   const { title, artist, album, albumUrl, releaseDate } = track;
 
   return (
-    <Track>
+    <Track tabIndex="0">
       <TrackImage src={albumUrl} alt="track cover" />
       <Info>
         <h3>{title}</h3>
@@ -20,6 +20,11 @@ const Track = styled.div`
   display: flex;
   cursor: pointer;
   margin-bottom: 0.5rem;
+
+  :focus {
+    outline: 4px dashed green;
+    background-color: lightgreen;
+  }
 `;
 
 const TrackImage = styled.img`
