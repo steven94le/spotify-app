@@ -6,8 +6,10 @@ import TrackSearchResult from "./TrackSearchResult";
 import Player from "./Player";
 import axios from "axios";
 
+const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
+
 const spotifyApi = new SpotifyWebApi({
-  clientId: "cc11ef95fff14646885a708825f8b6c2",
+  clientId: CLIENT_ID,
 });
 
 const Dashboard = ({ code }) => {
