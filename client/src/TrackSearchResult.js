@@ -1,10 +1,14 @@
 import styled from "styled-components";
 
-const TrackSearchResult = ({ track }) => {
+const TrackSearchResult = ({ track, chooseTrack }) => {
   const { title, artist, album, albumUrl, releaseDate } = track;
 
+  const handlePlay = () => {
+    chooseTrack(track);
+  };
+
   return (
-    <Track tabIndex="0">
+    <Track tabIndex="0" onClick={handlePlay}>
       <TrackImage src={albumUrl} alt="track cover" />
       <Info>
         <h3>{title}</h3>

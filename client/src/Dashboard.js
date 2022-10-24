@@ -3,6 +3,7 @@ import useAuth from "./useAuth";
 import SpotifyWebApi from "spotify-web-api-node";
 import styled from "styled-components";
 import TrackSearchResult from "./TrackSearchResult";
+import Player from "./Player";
 
 const spotifyApi = new SpotifyWebApi({
   clientId: "cc11ef95fff14646885a708825f8b6c2",
@@ -13,6 +14,11 @@ const Dashboard = ({ code }) => {
 
   const [search, setSearch] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+  const [playingTrack, setPlayingTrack] = useState();
+
+  const chooseTrack = (track) => {
+    setPlayingTrack(track);
+  };
 
   useEffect(() => {
     if (!accessToken) return;
@@ -55,9 +61,16 @@ const Dashboard = ({ code }) => {
       />
       <ResultContainer>
         {searchResults.map((track) => (
-          <TrackSearchResult track={track} key={track.uri} />
+          <TrackSearchResult
+            track={track}
+            key={track.uri}
+            chooseTrack={chooseTrack}
+          />
         ))}
       </ResultContainer>
+      <div>
+        <Player accessToken={accessToken} trackUri={playingTrack?.uri} />
+      </div>
     </Container>
   );
 };
