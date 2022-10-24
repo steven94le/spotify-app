@@ -4,6 +4,7 @@ import SpotifyWebApi from "spotify-web-api-node";
 import styled from "styled-components";
 import TrackSearchResult from "./TrackSearchResult";
 import Player from "./Player";
+import axios from "axios";
 
 const spotifyApi = new SpotifyWebApi({
   clientId: "cc11ef95fff14646885a708825f8b6c2",
@@ -15,9 +16,12 @@ const Dashboard = ({ code }) => {
   const [search, setSearch] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [playingTrack, setPlayingTrack] = useState();
+  const [trackLyrics, setTrackLyrics] = useState();
 
   const chooseTrack = (track) => {
     setPlayingTrack(track);
+    setSearch("");
+    setTrackLyrics("");
   };
 
   useEffect(() => {
@@ -51,6 +55,20 @@ const Dashboard = ({ code }) => {
     return () => (cancel = true);
   }, [search, accessToken]);
 
+  useEffect(() => {
+    if (!playingTrack) return;
+    axios
+      .get("http://localhost:8000/lyrics", {
+        params: {
+          track: playingTrack.title,
+          artist: playingTrack.artist,
+        },
+      })
+      .then((res) => {
+        setTrackLyrics(res.data.lyrics);
+      });
+  }, [playingTrack]);
+
   return (
     <Container>
       <StyledInput
@@ -67,6 +85,7 @@ const Dashboard = ({ code }) => {
             chooseTrack={chooseTrack}
           />
         ))}
+        {searchResults.length === 0 && <Lyrics>{trackLyrics}</Lyrics>}
       </ResultContainer>
       <div>
         <Player accessToken={accessToken} trackUri={playingTrack?.uri} />
@@ -94,6 +113,17 @@ const ResultContainer = styled.div`
   overflow-y: auto;
   height: 100%;
   padding: 5px 3px;
+`;
+
+const Lyrics = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-y: auto;
+  font-size: 20px;
+  white-space: pre;
+  padding: 10px 0;
+  text-align: center;
 `;
 
 export default Dashboard;
