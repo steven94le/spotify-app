@@ -21,6 +21,26 @@ const useAuth = (code) => {
       });
   }, [code]);
 
+  useEffect(() => {
+    if (!refreshToken || !expiresIn) return;
+
+    const interval = setInterval(() => {
+      axios
+        .post("http://localhost:8000/refresh", {
+          refreshToken,
+        })
+        .then((res) => {
+          setAccessToken(res.data.accessToken);
+          setExpiresIn(res.data.expiresIn);
+        })
+        .catch((err) => {
+          console.log("err:", err);
+        });
+    }, (expiresIn - 60) * 1000);
+
+    return () => clearInterval(interval);
+  }, [refreshToken, expiresIn]);
+
   return accessToken;
 };
 
