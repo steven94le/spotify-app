@@ -7,8 +7,15 @@ const TrackSearchResult = ({ track, chooseTrack }) => {
     chooseTrack(track);
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      chooseTrack(track);
+    }
+  };
+
   return (
-    <Track tabIndex="0" onClick={handlePlay}>
+    <Track tabIndex="0" onClick={handlePlay} onKeyDown={handleKeyDown}>
       <TrackImage src={albumUrl} alt="track cover" />
       <Info>
         <h3>{title}</h3>
