@@ -1,12 +1,17 @@
 require("dotenv").config();
 const express = require("express");
 const SpotifyWebApi = require("spotify-web-api-node");
+const cors = require("cors");
+const bodyParser = require("body-parser");
 
 const PORT = 8000;
 
 const app = express();
+app.use(cors());
+app.use(bodyParser.json());
 
 app.post("/login", (req, res) => {
+  const { code } = req.body;
   const spotifyApi = new SpotifyWebApi({
     redirectUri: process.env.REDIRECT_URI,
     clientId: process.env.CLIENT_ID,
