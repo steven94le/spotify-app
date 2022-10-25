@@ -2,7 +2,7 @@
 
 # Introduction :wave:
 
-A work-in-progress app that currently allows Spotify users (once logged in) to search up and play songs, save selected songs into their profile library, and read lyrics (if applicable) for a selected song. Each user logs in and is given a Spotify Access Token so that the client can make requests to Spotify Web API Node and Spotify Web Player. Track lyrics are obtained through Lyrics Searcher. Refresh Tokens are used to let the application get new Access Tokens without having to ask the user to log in again.
+A work-in-progress full-stack app that currently allows Spotify users (once logged in) to search up and play songs, save selected songs into their profile library, and read lyrics (if applicable) for a selected song. Each user logs in and is given a Spotify Access Token so that the client can make requests to Spotify Web API Node and Spotify Web Player. Track lyrics are obtained through Lyrics Searcher. Refresh Tokens are used to let the application get new Access Tokens without having to ask the user to log in again.
 
 ---
 
