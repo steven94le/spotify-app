@@ -32,7 +32,7 @@ This will run the app in development mode. Open http://localhost:3000 to view it
 
 1. Navigate to the server folder `cd server`
 2. Install the required packages `yarn install`
-3. Once that's done you can start the server with `npm run Devstart`
+3. Once that's done you can start the server with `npm run devStart`
 
 ### Resources Used
 
